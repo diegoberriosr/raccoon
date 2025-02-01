@@ -2,19 +2,29 @@
 namespace app\core;
 
 class Application {
-	public Logger $logger;
 	private Router $router;
 		
 	public function __construct() {
-		$logger -> new Logger();
-		$router -> new Router();	
-	};
+		$this -> router = new Router();	
+	}
+	
+	public function get($path, $callback){
+		$this-> router -> setRoute($path, 'GET', $callback);
+	}
 
-	public function getRouter(){
-		return $this -> router;
-	};
+	public function post($path, $callback){
+		$this-> router -> setRoute($path, 'POST', $callback);
+	}
+
+	public function put($path, $callback){
+		$this-> router -> setRoute($path, 'PUT', $callback);
+	}
+
+	public function delete($path, $callback){
+		$this-> router -> setRoute($path, 'DELETE', $callback);
+	}
 
 	public function run(){
-		echo "TO DO";	
-	};
+		$this-> router -> resolveRequest();
+	}
 }

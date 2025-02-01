@@ -5,4 +5,8 @@ use app\core\Application;
 
 $app = new Application();
 
-echo "Hello World!\n";
+$app -> get('/hi', function(){ echo 'Hi';});
+$app -> get('/test', function(){ echo 'Test';});
+$app -> get('/raccon', function(){ echo 'Hello from Raccoon';});
+
+$app -> run();

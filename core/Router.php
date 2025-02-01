@@ -5,26 +5,21 @@ class Router {
 	private array $routes;
 	
 	public function __constructor(){
-		$this->routes = [];	
+		$this -> routes = [];
 	}
 
-	private function setRoute($path, $method, $callback) {
+	public function setRoute($path, $method, $callback) {
 		$this->routes[$method][$path] = $callback;
-	};
-
-	public function get($path, $callback){
-		setRoute($path, HTTP_VERBS::GET, $callback);
-	};
-
-	public function post($path, $callback){
-		setRoute($path, HTTP_VERBS::POST, $callback);
 	}
 
-	public function put($path, $callback){
-		setRoute($path, HTTP_VERBS::PUT, $callback);
-	}
-
-	public function delete($path, $callback){
-		setRoute($path, HTTP_VERBS::DELETE, $callback);
+	public function resolveRequest() {
+		$method = $_SERVER['REQUEST_METHOD'];
+		$URI = $_SERVER['REQUEST_URI'];
+		
+		if(isset($this-> routes[$method][$URI])) {
+			$this-> routes[$method][$URI]();
+		} else {
+			echo '404: Route not found';
+		}
 	}
 }
