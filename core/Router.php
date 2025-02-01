@@ -14,7 +14,7 @@ class Router {
 
 	public function resolveRequest() {
 		$method = $_SERVER['REQUEST_METHOD'];
-		$URI = $_SERVER['REQUEST_URI'];
+		$URI = $_SERVER['PATH_INFO'];
 		
 		if(isset($this-> routes[$method][$URI])) {
 			$this-> routes[$method][$URI]();
