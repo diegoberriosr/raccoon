@@ -12,7 +12,6 @@ class Views {
 		
 		$view = require_once($filepath);
 		echo $view;
-
 	}
 }
 
