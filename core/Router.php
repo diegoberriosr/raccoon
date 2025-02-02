@@ -3,7 +3,7 @@ namespace app\core;
 
 class Router {
 	private array $routes;
-	
+
 	public function __constructor(){
 		$this -> routes = [];
 	}
@@ -13,13 +13,15 @@ class Router {
 	}
 
 	public function resolveRequest() {
-		$method = $_SERVER['REQUEST_METHOD'];
-		$URI = $_SERVER['PATH_INFO'];
+	    $request = new Request();	
+		$method = $request -> getMethod();
+		$URL = $request -> getURL(); 
 		
-		if(isset($this-> routes[$method][$URI])) {
-			$this-> routes[$method][$URI]();
-		} else {
-			echo '404: Route not found';
+		if(!isset($this-> routes[$method][$URL])) {
+			echo "Route not found";
+			exit;
 		}
+
+		$this -> routes[$method][$URL]();
 	}
 }
